@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createGreeting, fetchHealth, listCapabilities } from "@uniframe/core";
 import "../style.css";
 
-export function App() {
+export function AppRoot() {
   const [health, setHealth] = useState({ ok: false });
   const greeting = createGreeting("Mobile");
 

@@ -12,9 +12,10 @@ interface FrameworkConfig {
   };
   targets?: {
     web?: {
-      defaultFlavor?: "react" | "vanilla";
+      defaultFlavor?: "react" | "vanilla" | "vue";
       reactPort?: number;
       vanillaPort?: number;
+      vuePort?: number;
     };
     mobile?: {
       port?: number;
@@ -116,7 +117,15 @@ function viteArgs(app: string, mode: "dev" | "build", port?: number): string[] {
 }
 
 function appFor(flavor: string) {
-  return flavor === "vanilla" ? "web-vanilla" : "web-react";
+  if (flavor === "vanilla") return "web-vanilla";
+  if (flavor === "vue") return "web-vue";
+  return "web-react";
+}
+
+function portForWebFlavor(flavor: string) {
+  if (flavor === "vanilla") return config.targets?.web?.vanillaPort ?? 5174;
+  if (flavor === "vue") return config.targets?.web?.vuePort ?? 5177;
+  return config.targets?.web?.reactPort ?? 5173;
 }
 
 async function dev(targetName?: string) {
@@ -124,23 +133,20 @@ async function dev(targetName?: string) {
     await runMany([
       { name: "api", color: "cyan", cmd: `tsx ${cliPath} dev api` },
       { name: "react", color: "green", cmd: `tsx ${cliPath} dev web --flavor react` },
+      { name: "vue", color: "blue", cmd: `tsx ${cliPath} dev web --flavor vue` },
       { name: "vanilla", color: "yellow", cmd: `tsx ${cliPath} dev web --flavor vanilla` }
     ]);
     return;
   }
 
   if (targetName === "api") {
-    run(npxCmd, ["tsx", resolve(root, "apps/api/src/server.ts")]);
+    run(npxCmd, ["tsx", resolve(root, "apps/api/src/api-server.ts")]);
     return;
   }
 
   if (targetName === "web") {
     const flavor = getFlag("flavor", config.targets?.web?.defaultFlavor ?? "react");
-    const port =
-      flavor === "vanilla"
-        ? (config.targets?.web?.vanillaPort ?? 5174)
-        : (config.targets?.web?.reactPort ?? 5173);
-    run(npxCmd, viteArgs(appFor(flavor), "dev", port));
+    run(npxCmd, viteArgs(appFor(flavor), "dev", portForWebFlavor(flavor)));
     return;
   }
 
@@ -172,6 +178,7 @@ async function build(targetName?: string) {
   if (!targetName) {
     await runMany([
       { name: "web-react", color: "green", cmd: `tsx ${cliPath} build web --flavor react` },
+      { name: "web-vue", color: "blue", cmd: `tsx ${cliPath} build web --flavor vue` },
       { name: "web-vanilla", color: "yellow", cmd: `tsx ${cliPath} build web --flavor vanilla` },
       { name: "mobile", color: "blue", cmd: `tsx ${cliPath} build mobile` }
     ]);
@@ -209,16 +216,20 @@ function check() {
     ".github/workflows/ci.yml",
     ".vscode/extensions.json",
     ".vscode/settings.json",
-    "apps/api/src/server.ts",
+    "apps/api/src/api-server.ts",
     "apps/web-react/index.html",
-    "apps/web-react/src/app/App.tsx",
+    "apps/web-react/src/app/app-root.tsx",
     "apps/web-react/src/main.tsx",
     "apps/web-react/vite.config.ts",
+    "apps/web-vue/index.html",
+    "apps/web-vue/src/app/app-root.vue",
+    "apps/web-vue/src/main.ts",
+    "apps/web-vue/vite.config.ts",
     "apps/web-vanilla/index.html",
     "apps/web-vanilla/src/main.ts",
     "apps/web-vanilla/vite.config.ts",
     "apps/mobile-react/index.html",
-    "apps/mobile-react/src/app/App.tsx",
+    "apps/mobile-react/src/app/app-root.tsx",
     "apps/mobile-react/src/main.tsx",
     "apps/mobile-react/vite.config.ts",
     "apps/desktop/main.cjs",
@@ -226,6 +237,7 @@ function check() {
     "packages/adapters/src/node.ts",
     "packages/adapters/src/types.ts",
     "packages/adapters/src/web.ts",
+    "packages/vite/src/index.ts",
     "packages/core/src/contracts.ts",
     "packages/core/src/index.ts",
     "packages/core/src/manifest.ts",
@@ -233,6 +245,9 @@ function check() {
     "packages/cli/src/uniframe.ts",
     "tests/contracts.test.ts",
     "tests/cli.test.ts",
+    "examples/hello-uniframe/package.json",
+    "examples/hello-uniframe/src/app/app-root.vue",
+    "examples/hello-uniframe/vite.config.ts",
     "templates/adapter/adapter.ts",
     "tsconfig.json",
     "eslint.config.js",
@@ -240,15 +255,26 @@ function check() {
   ];
 
   const missing = required.filter((file) => !existsSync(resolve(root, file)));
-  const missingScripts = ["ci", "lint", "typecheck", "test", "build", "check"].filter(
-    (script) => !packageJson.scripts?.[script]
-  );
-  const missingDependencies = ["vite", "express", "electron", "react", "react-dom"].filter(
+  const missingScripts = [
+    "ci",
+    "lint",
+    "typecheck",
+    "test",
+    "build",
+    "build:example",
+    "build:packages",
+    "check"
+  ].filter((script) => !packageJson.scripts?.[script]);
+  const missingDependencies = ["vite", "express", "electron", "react", "react-dom", "vue"].filter(
     (dependency) => !packageJson.dependencies?.[dependency]
   );
-  const missingDevDependencies = ["tsx", "typescript", "vite-tsconfig-paths"].filter(
-    (dependency) => !packageJson.devDependencies?.[dependency]
-  );
+  const missingDevDependencies = [
+    "@vitejs/plugin-vue",
+    "tsx",
+    "typescript",
+    "vite-tsconfig-paths",
+    "vue-tsc"
+  ].filter((dependency) => !packageJson.devDependencies?.[dependency]);
 
   if (missing.length) {
     console.error("Eksik dosyalar:");
@@ -284,8 +310,13 @@ function check() {
 function clean() {
   const paths = [
     "apps/web-react/dist",
+    "apps/web-vue/dist",
     "apps/web-vanilla/dist",
     "apps/mobile-react/dist",
+    "examples/hello-uniframe/dist",
+    "packages/core/dist",
+    "packages/adapters/dist",
+    "packages/vite/dist",
     "dist",
     ".vite"
   ];
@@ -312,6 +343,7 @@ function info() {
   console.log(`- api: ${config.api?.port ?? 4100}`);
   console.log(`- web react: ${config.targets?.web?.reactPort ?? 5173}`);
   console.log(`- web vanilla: ${config.targets?.web?.vanillaPort ?? 5174}`);
+  console.log(`- web vue: ${config.targets?.web?.vuePort ?? 5177}`);
   console.log(`- mobile: ${config.targets?.mobile?.port ?? 5175}`);
   console.log(`- desktop web: ${config.targets?.desktop?.webPort ?? 5176}`);
 }
@@ -321,9 +353,10 @@ function help() {
 Uniframe CLI
 
 Komutlar:
-  npm run dev                 API + React web + vanilla web
+  npm run dev                 API + React web + Vue web + vanilla web
   npm run dev:api             TypeScript Express API
   npm run dev:web:react       React + TypeScript web
+  npm run dev:web:vue         Vue + TypeScript web
   npm run dev:web:vanilla     Vanilla TypeScript web
   npm run dev:mobile          Mobile-first React + TypeScript hedefi
   npm run dev:desktop         Electron desktop wrapper

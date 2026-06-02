@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
-import { App } from "./app/App";
+import { AppRoot } from "./app/app-root";
 
 const rootElement = document.getElementById("root");
 
@@ -7,4 +7,4 @@ if (!rootElement) {
   throw new Error("Mobile root elementi bulunamadi.");
 }
 
-createRoot(rootElement).render(<App />);
+createRoot(rootElement).render(<AppRoot />);

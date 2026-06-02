@@ -1,5 +1,5 @@
 export type TargetRuntime = "node" | "vite" | "electron";
-export type TargetFlavor = "api" | "react" | "vanilla" | "desktop";
+export type TargetFlavor = "api" | "react" | "vanilla" | "vue" | "desktop";
 
 export interface TargetDefinition {
   runtime: TargetRuntime;
@@ -24,7 +24,7 @@ export const manifest = {
     api: {
       runtime: "node",
       flavor: "api",
-      entry: "apps/api/src/server.ts"
+      entry: "apps/api/src/api-server.ts"
     },
     webReact: {
       runtime: "vite",
@@ -35,6 +35,11 @@ export const manifest = {
       runtime: "vite",
       flavor: "vanilla",
       entry: "apps/web-vanilla/src/main.ts"
+    },
+    webVue: {
+      runtime: "vite",
+      flavor: "vue",
+      entry: "apps/web-vue/src/main.ts"
     },
     mobile: {
       runtime: "vite",

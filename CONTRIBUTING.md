@@ -5,7 +5,8 @@
 1. Degisiklikleri kucuk ve odakli tutun.
 2. Yeni hedef eklerken `packages/core/src/manifest.ts` dosyasini guncelleyin.
 3. Yeni adapter eklerken `packages/adapters/src` altinda `RuntimeAdapter` uygulayin.
-4. PR acmadan once `npm run ci` calistirin.
+4. Yeni Vite hedefleri icin `@uniframe/vite` helper'ini kullanin.
+5. PR acmadan once `npm run ci` calistirin.
 
 ## Kod Stili
 

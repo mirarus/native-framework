@@ -1,3 +1,4 @@
+import vue from "@vitejs/plugin-vue";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { defineUniframeViteConfig } from "@uniframe/vite";
@@ -12,6 +13,7 @@ export default defineUniframeViteConfig(
     }
   },
   {
-    root: appRoot
+    root: appRoot,
+    plugins: [vue()]
   }
 );

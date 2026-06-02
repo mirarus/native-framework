@@ -23,24 +23,31 @@ npm run ci
 ```bash
 npm run dev:api
 npm run dev:web:react
+npm run dev:web:vue
 npm run dev:web:vanilla
 npm run dev:mobile
 npm run dev:desktop
+npm run dev:example
 ```
 
 ## Dosya Yapisi
 
 ```txt
 apps/
-  api/src/server.ts
+  api/src/api-server.ts
   web-react/src/main.tsx
-  web-react/src/app/App.tsx
+  web-react/src/app/app-root.tsx
+  web-vue/src/main.ts
+  web-vue/src/app/app-root.vue
   web-vanilla/src/main.ts
   mobile-react/src/main.tsx
-  mobile-react/src/app/App.tsx
+  mobile-react/src/app/app-root.tsx
+examples/
+  hello-uniframe
 packages/
   core/src
   adapters/src
+  vite/src
   cli/src
 ```
 
@@ -51,3 +58,4 @@ packages/
 - `npm run clean` build ciktilarini temizler.
 - `npm run info` framework manifest ve port bilgisini yazdirir.
 - VS Code task'lari `.vscode/tasks.json` icinde hazirdir.
+- `npm run build:packages` library paketlerini ESM, CJS ve type declaration formatinda uretir.

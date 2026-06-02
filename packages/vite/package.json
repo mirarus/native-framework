@@ -1,5 +1,5 @@
 {
-  "name": "@uniframe/adapters",
+  "name": "@uniframe/vite",
   "version": "0.1.0",
   "private": false,
   "type": "module",
@@ -19,7 +19,10 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean"
   },
+  "peerDependencies": {
+    "vite": ">=7.0.0"
+  },
   "dependencies": {
-    "@uniframe/core": "0.1.0"
+    "vite-tsconfig-paths": "^6.1.1"
   }
 }

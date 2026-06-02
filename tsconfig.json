@@ -15,7 +15,9 @@
       "@uniframe/adapters": ["packages/adapters/src/index.ts"],
       "@uniframe/adapters/*": ["packages/adapters/src/*"],
       "@uniframe/core": ["packages/core/src/index.ts"],
-      "@uniframe/core/*": ["packages/core/src/*"]
+      "@uniframe/core/*": ["packages/core/src/*"],
+      "@uniframe/vite": ["packages/vite/src/index.ts"],
+      "@uniframe/vite/*": ["packages/vite/src/*"]
     },
     "skipLibCheck": true,
     "strict": true,
@@ -27,6 +29,10 @@
     "apps/**/*.jsx",
     "apps/**/*.ts",
     "apps/**/*.tsx",
+    "apps/**/*.vue",
+    "examples/**/*.ts",
+    "examples/**/*.tsx",
+    "examples/**/*.vue",
     "framework.config.js",
     "packages/**/*.js",
     "packages/**/*.ts",

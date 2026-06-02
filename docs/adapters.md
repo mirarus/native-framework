@@ -6,6 +6,7 @@ Uniframe'de platform farklari adapter paketleriyle izole edilir. Yeni bir platfo
 
 - `@uniframe/core`: Manifest, contract, platform tipleri ve ortak runtime yardimcilari.
 - `@uniframe/adapters`: Browser ve Node adapter ornekleri.
+- `@uniframe/vite`: Vite tabanli hedefler icin ortak config helper'i.
 
 ## Yeni Adapter Ekleme
 

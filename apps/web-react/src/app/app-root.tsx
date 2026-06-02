@@ -4,7 +4,7 @@ import "../style.css";
 
 const storage = createStorage("react");
 
-export function App() {
+export function AppRoot() {
   const [health, setHealth] = useState({ ok: false, service: "api" });
   const [count, setCount] = useState(() => storage.get("count", 0));
   const greeting = createGreeting("React Web");

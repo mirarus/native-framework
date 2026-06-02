@@ -2,7 +2,7 @@
   "name": "uniframe-starter",
   "version": "0.1.0",
   "private": true,
-  "description": "Tek cati altinda API, web, desktop, mobile, React ve vanilla JS destekli framework starter.",
+  "description": "Tek cati altinda API, web, desktop, mobile, React, Vue ve vanilla TypeScript destekli framework workspace'i.",
   "type": "module",
   "engines": {
     "node": ">=22.12.0",
@@ -12,27 +12,32 @@
     "uniframe": "./packages/cli/uniframe.js"
   },
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*"
   ],
   "scripts": {
-    "dev": "tsx packages/cli/src/uniframe.ts dev",
+    "dev": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev",
     "dev:api": "tsx packages/cli/src/uniframe.ts dev api",
-    "dev:web": "tsx packages/cli/src/uniframe.ts dev web",
-    "dev:web:react": "tsx packages/cli/src/uniframe.ts dev web --flavor react",
-    "dev:web:vanilla": "tsx packages/cli/src/uniframe.ts dev web --flavor vanilla",
-    "dev:mobile": "tsx packages/cli/src/uniframe.ts dev mobile",
-    "dev:desktop": "tsx packages/cli/src/uniframe.ts dev desktop",
-    "build": "tsx packages/cli/src/uniframe.ts build",
+    "dev:web": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev web",
+    "dev:web:react": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev web --flavor react",
+    "dev:web:vue": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev web --flavor vue",
+    "dev:web:vanilla": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev web --flavor vanilla",
+    "dev:mobile": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev mobile",
+    "dev:desktop": "npm run build:packages && tsx packages/cli/src/uniframe.ts dev desktop",
+    "dev:example": "npm run build:packages && npm --workspace examples/hello-uniframe run dev",
+    "build": "npm run build:packages && tsx packages/cli/src/uniframe.ts build",
+    "build:example": "npm --workspace examples/hello-uniframe run build",
+    "build:packages": "npm --workspace @uniframe/core run build && npm --workspace @uniframe/adapters run build && npm --workspace @uniframe/vite run build",
     "build:web": "tsx packages/cli/src/uniframe.ts build web",
     "check": "tsx packages/cli/src/uniframe.ts check",
-    "ci": "npm run check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "ci": "npm run check && npm run lint && npm run typecheck && npm run test && npm run build && npm run build:example",
     "clean": "tsx packages/cli/src/uniframe.ts clean",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "info": "tsx packages/cli/src/uniframe.ts info",
     "lint": "eslint .",
     "test": "vitest run",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
@@ -41,7 +46,8 @@
     "express": "^5.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "vite": "^7.1.5"
+    "vite": "^7.1.5",
+    "vue": "^3.5.35"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -49,13 +55,18 @@
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.16",
     "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-vue": "^6.0.7",
     "eslint": "^10.4.1",
+    "eslint-plugin-vue": "^10.9.1",
     "globals": "^17.6.0",
     "prettier": "^3.8.3",
+    "tsup": "^8.5.1",
     "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.60.1",
     "vite-tsconfig-paths": "^6.1.1",
-    "vitest": "^4.1.8"
+    "vitest": "^4.1.8",
+    "vue-eslint-parser": "^10.4.1",
+    "vue-tsc": "^3.3.3"
   }
 }

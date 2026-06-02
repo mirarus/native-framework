@@ -1,6 +1,8 @@
 import js from "@eslint/js";
+import vue from "eslint-plugin-vue";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+import vueParser from "vue-eslint-parser";
 
 export default [
   {
@@ -8,6 +10,7 @@ export default [
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  ...vue.configs["flat/recommended"],
   {
     files: ["**/*.{js,jsx}"],
     languageOptions: {
@@ -56,6 +59,25 @@ export default [
     rules: {
       "no-unused-vars": "off",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }]
+    }
+  },
+  {
+    files: ["**/*.vue"],
+    languageOptions: {
+      parser: vueParser,
+      parserOptions: {
+        ecmaVersion: 2024,
+        extraFileExtensions: [".vue"],
+        parser: tseslint.parser,
+        sourceType: "module"
+      },
+      globals: {
+        ...globals.browser
+      }
+    },
+    rules: {
+      "vue/max-attributes-per-line": "off",
+      "vue/singleline-html-element-content-newline": "off"
     }
   }
 ];

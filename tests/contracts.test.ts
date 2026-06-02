@@ -11,7 +11,14 @@ describe("shared contracts", () => {
   it("exposes stable application metadata", () => {
     expect(appInfo.product).toBe("Uniframe");
     expect(appInfo.version).toBe(manifest.version);
-    expect(listTargetKeys()).toEqual(["api", "webReact", "webVanilla", "mobile", "desktop"]);
+    expect(listTargetKeys()).toEqual([
+      "api",
+      "webReact",
+      "webVanilla",
+      "webVue",
+      "mobile",
+      "desktop"
+    ]);
   });
 
   it("creates platform-specific greetings from shared logic", () => {

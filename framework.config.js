@@ -7,7 +7,8 @@ export default {
     web: {
       defaultFlavor: "react",
       reactPort: 5173,
-      vanillaPort: 5174
+      vanillaPort: 5174,
+      vuePort: 5177
     },
     mobile: {
       flavor: "react",
