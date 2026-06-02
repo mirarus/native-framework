@@ -44,6 +44,8 @@ npm run dev:web:vue      # http://localhost:5177
 npm run dev:mobile       # http://localhost:5175
 npm run dev:desktop      # Electron wrapper + React web
 npm run dev:example      # examples/hello-uniframe
+npm run dev:example:fullstack
+npm run dev:example:fullstack:desktop
 ```
 
 ## Bilgi ve Temizlik
@@ -76,6 +78,11 @@ apps/
   desktop/         Electron wrapper
 examples/
   hello-uniframe/  Framework paketlerini library gibi kullanan ornek proje
+  fullstack-uniframe/
+    apps/api/      Example Express API
+    apps/web/      Example Vue web
+    apps/desktop/  Example Electron wrapper
+    apps/android/  Android/Capacitor rehberi
 packages/
   adapters/        Platform adapter ornekleri
   cli/             TypeScript kaynakli Uniframe komut satiri
@@ -104,3 +111,24 @@ Uniframe'in ana ilkesi tek cati, coklu hedef:
 - Mobile hedefi bugun mobile-first web/PWA olarak calisir; Expo/React Native adapter'i icin ayni CLI hedefi korunur.
 
 Bu paket artik sadece MVP degil; CI, lint, typecheck, test, manifest, publish-ready library paketleri, ornek proje, dokumantasyon ve guvenlik hijyeni olan genisletilebilir bir framework temelidir.
+
+## Fullstack Example
+
+`examples/fullstack-uniframe` icinde ayni proje altinda hedefler ayridir:
+
+```bash
+npm --workspace fullstack-uniframe run dev:api
+npm --workspace fullstack-uniframe run dev:web
+npm --workspace fullstack-uniframe run dev:desktop
+npm --workspace fullstack-uniframe run build
+```
+
+Android icin:
+
+```bash
+npm --workspace fullstack-uniframe run android:add
+npm --workspace fullstack-uniframe run android:sync
+npm --workspace fullstack-uniframe run android:open
+```
+
+Android komutlari Android Studio ve Android SDK gerektirir.

@@ -28,6 +28,8 @@ npm run dev:web:vanilla
 npm run dev:mobile
 npm run dev:desktop
 npm run dev:example
+npm run dev:example:fullstack
+npm run dev:example:fullstack:desktop
 ```
 
 ## Dosya Yapisi
@@ -44,6 +46,11 @@ apps/
   mobile-react/src/app/app-root.tsx
 examples/
   hello-uniframe
+  fullstack-uniframe
+    apps/api
+    apps/web
+    apps/desktop
+    apps/android
 packages/
   core/src
   adapters/src
@@ -59,3 +66,4 @@ packages/
 - `npm run info` framework manifest ve port bilgisini yazdirir.
 - VS Code task'lari `.vscode/tasks.json` icinde hazirdir.
 - `npm run build:packages` library paketlerini ESM, CJS ve type declaration formatinda uretir.
+- `examples/fullstack-uniframe` API, web, desktop ve Android akisini tek proje icinde gosterir.
