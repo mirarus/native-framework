@@ -69,19 +69,22 @@ npm run build
 ## Mimari
 
 ```txt
-apps/
+playground/
   api/             TypeScript Express API
   web-react/       React + TypeScript web hedefi
   web-vue/         Vue + TypeScript web hedefi
   web-vanilla/     Vanilla TypeScript web hedefi
   mobile-react/    Mobile-first React + TypeScript hedefi
-  desktop/         Electron wrapper
+  desktop/
+    main/          Electron main process
+    preload/       Guvenli bridge
+    renderer/      Desktop UI
 examples/
   hello-uniframe/  Framework paketlerini library gibi kullanan ornek proje
   fullstack-uniframe/
     apps/api/      Example Express API
     apps/web/      Example Vue web
-    apps/desktop/  Example Electron wrapper
+    apps/desktop/  Example Electron main + desktop renderer UI
     apps/android/  Android/Capacitor rehberi
 packages/
   adapters/        Platform adapter ornekleri

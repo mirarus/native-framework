@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { resolve } from "node:path";
 
 const port = process.argv[2] ?? "5176";
 const url = `http://127.0.0.1:${port}`;
@@ -11,16 +12,16 @@ async function waitForServer() {
       const response = await fetch(url);
       if (response.ok) return;
     } catch {
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolveWait) => setTimeout(resolveWait, 500));
     }
   }
 
-  throw new Error(`Desktop web hedefi acilmadi: ${url}`);
+  throw new Error(`Desktop renderer acilmadi: ${url}`);
 }
 
 await waitForServer();
 
-const child = spawn(electron, ["apps/desktop/main.cjs"], {
+const child = spawn(electron, [resolve("playground/desktop/main/desktop-main.cjs")], {
   env: { ...process.env, UNIFRAME_DESKTOP_URL: url },
   shell: isWindows,
   stdio: "inherit"

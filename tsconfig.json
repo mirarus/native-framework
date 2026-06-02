@@ -25,11 +25,11 @@
     "types": ["node", "react", "react-dom", "vite/client"]
   },
   "include": [
-    "apps/**/*.js",
-    "apps/**/*.jsx",
-    "apps/**/*.ts",
-    "apps/**/*.tsx",
-    "apps/**/*.vue",
+    "playground/**/*.js",
+    "playground/**/*.jsx",
+    "playground/**/*.ts",
+    "playground/**/*.tsx",
+    "playground/**/*.vue",
     "examples/**/*.ts",
     "examples/**/*.tsx",
     "examples/**/*.vue",

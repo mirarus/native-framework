@@ -1,4 +1,5 @@
 const { app, BrowserWindow } = require("electron");
+const { join } = require("node:path");
 
 const targetUrl = process.env.UNIFRAME_DESKTOP_URL || "http://127.0.0.1:5176";
 
@@ -8,10 +9,11 @@ function createWindow() {
     height: 760,
     minWidth: 840,
     minHeight: 560,
-    title: "Uniframe Desktop",
+    title: "Uniframe Desktop Playground",
     webPreferences: {
       contextIsolation: true,
-      nodeIntegration: false
+      nodeIntegration: false,
+      preload: join(__dirname, "../preload/desktop-preload.cjs")
     }
   });
 

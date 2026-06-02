@@ -109,7 +109,7 @@ async function runMany(commands: ParallelCommand[]) {
 }
 
 function viteArgs(app: string, mode: "dev" | "build", port?: number): string[] {
-  const configFile = resolve(root, "apps", app, "vite.config.ts");
+  const configFile = resolve(root, "playground", app, "vite.config.ts");
   const base = ["vite", "--config", configFile, "--host", "0.0.0.0"];
   return mode === "build"
     ? ["vite", "build", "--config", configFile]
@@ -140,7 +140,7 @@ async function dev(targetName?: string) {
   }
 
   if (targetName === "api") {
-    run(npxCmd, ["tsx", resolve(root, "apps/api/src/api-server.ts")]);
+    run(npxCmd, ["tsx", resolve(root, "playground/api/src/api-server.ts")]);
     return;
   }
 
@@ -160,12 +160,12 @@ async function dev(targetName?: string) {
       {
         name: "desktop-web",
         color: "green",
-        cmd: `${npxCmd} vite --config apps/web-react/vite.config.ts --host 127.0.0.1 --port ${config.targets?.desktop?.webPort ?? 5176}`
+        cmd: `${npxCmd} vite --config playground/desktop/renderer/vite.config.ts --host 127.0.0.1 --port ${config.targets?.desktop?.webPort ?? 5176}`
       },
       {
         name: "electron",
         color: "magenta",
-        cmd: `node apps/desktop/wait-and-open.js ${config.targets?.desktop?.webPort ?? 5176}`
+        cmd: `tsx playground/desktop/main/wait-and-open.ts ${config.targets?.desktop?.webPort ?? 5176}`
       }
     ]);
     return;
@@ -216,23 +216,26 @@ function check() {
     ".github/workflows/ci.yml",
     ".vscode/extensions.json",
     ".vscode/settings.json",
-    "apps/api/src/api-server.ts",
-    "apps/web-react/index.html",
-    "apps/web-react/src/app/app-root.tsx",
-    "apps/web-react/src/main.tsx",
-    "apps/web-react/vite.config.ts",
-    "apps/web-vue/index.html",
-    "apps/web-vue/src/app/app-root.vue",
-    "apps/web-vue/src/main.ts",
-    "apps/web-vue/vite.config.ts",
-    "apps/web-vanilla/index.html",
-    "apps/web-vanilla/src/main.ts",
-    "apps/web-vanilla/vite.config.ts",
-    "apps/mobile-react/index.html",
-    "apps/mobile-react/src/app/app-root.tsx",
-    "apps/mobile-react/src/main.tsx",
-    "apps/mobile-react/vite.config.ts",
-    "apps/desktop/main.cjs",
+    "playground/api/src/api-server.ts",
+    "playground/web-react/index.html",
+    "playground/web-react/src/app/app-root.tsx",
+    "playground/web-react/src/main.tsx",
+    "playground/web-react/vite.config.ts",
+    "playground/web-vue/index.html",
+    "playground/web-vue/src/app/app-root.vue",
+    "playground/web-vue/src/main.ts",
+    "playground/web-vue/vite.config.ts",
+    "playground/web-vanilla/index.html",
+    "playground/web-vanilla/src/main.ts",
+    "playground/web-vanilla/vite.config.ts",
+    "playground/mobile-react/index.html",
+    "playground/mobile-react/src/app/app-root.tsx",
+    "playground/mobile-react/src/main.tsx",
+    "playground/mobile-react/vite.config.ts",
+    "playground/desktop/main/desktop-main.cjs",
+    "playground/desktop/preload/desktop-preload.cjs",
+    "playground/desktop/renderer/src/app/app-root.vue",
+    "playground/desktop/renderer/vite.config.ts",
     "packages/adapters/src/index.ts",
     "packages/adapters/src/node.ts",
     "packages/adapters/src/types.ts",
@@ -253,6 +256,8 @@ function check() {
     "examples/fullstack-uniframe/apps/web/src/app/app-root.vue",
     "examples/fullstack-uniframe/apps/web/vite.config.ts",
     "examples/fullstack-uniframe/apps/desktop/main.cjs",
+    "examples/fullstack-uniframe/apps/desktop/renderer/src/app/app-root.vue",
+    "examples/fullstack-uniframe/apps/desktop/renderer/vite.config.ts",
     "examples/fullstack-uniframe/apps/android/README.md",
     "examples/fullstack-uniframe/capacitor.config.ts",
     "templates/adapter/adapter.ts",
@@ -316,12 +321,14 @@ function check() {
 
 function clean() {
   const paths = [
-    "apps/web-react/dist",
-    "apps/web-vue/dist",
-    "apps/web-vanilla/dist",
-    "apps/mobile-react/dist",
+    "playground/web-react/dist",
+    "playground/web-vue/dist",
+    "playground/web-vanilla/dist",
+    "playground/mobile-react/dist",
+    "playground/desktop/renderer/dist",
     "examples/hello-uniframe/dist",
     "examples/fullstack-uniframe/apps/web/dist",
+    "examples/fullstack-uniframe/apps/desktop/renderer/dist",
     "examples/fullstack-uniframe/dist",
     "packages/core/dist",
     "packages/adapters/dist",

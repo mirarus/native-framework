@@ -35,7 +35,7 @@ npm run dev:example:fullstack:desktop
 ## Dosya Yapisi
 
 ```txt
-apps/
+playground/
   api/src/api-server.ts
   web-react/src/main.tsx
   web-react/src/app/app-root.tsx
@@ -44,12 +44,16 @@ apps/
   web-vanilla/src/main.ts
   mobile-react/src/main.tsx
   mobile-react/src/app/app-root.tsx
+  desktop/main/desktop-main.cjs
+  desktop/preload/desktop-preload.cjs
+  desktop/renderer/src/main.ts
 examples/
   hello-uniframe
   fullstack-uniframe
     apps/api
     apps/web
     apps/desktop
+    apps/desktop/renderer
     apps/android
 packages/
   core/src
@@ -61,7 +65,7 @@ packages/
 ## Notlar
 
 - Node.js 22.12+ gerekir.
-- Build ciktilari `apps/*/dist` altina gider ve git'e alinmaz.
+- Playground build ciktilari `playground/*/dist` altina gider ve git'e alinmaz.
 - `npm run clean` build ciktilarini temizler.
 - `npm run info` framework manifest ve port bilgisini yazdirir.
 - VS Code task'lari `.vscode/tasks.json` icinde hazirdir.

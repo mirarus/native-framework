@@ -24,32 +24,32 @@ export const manifest = {
     api: {
       runtime: "node",
       flavor: "api",
-      entry: "apps/api/src/api-server.ts"
+      entry: "playground/api/src/api-server.ts"
     },
     webReact: {
       runtime: "vite",
       flavor: "react",
-      entry: "apps/web-react/src/main.tsx"
+      entry: "playground/web-react/src/main.tsx"
     },
     webVanilla: {
       runtime: "vite",
       flavor: "vanilla",
-      entry: "apps/web-vanilla/src/main.ts"
+      entry: "playground/web-vanilla/src/main.ts"
     },
     webVue: {
       runtime: "vite",
       flavor: "vue",
-      entry: "apps/web-vue/src/main.ts"
+      entry: "playground/web-vue/src/main.ts"
     },
     mobile: {
       runtime: "vite",
       flavor: "react",
-      entry: "apps/mobile-react/src/main.tsx"
+      entry: "playground/mobile-react/src/main.tsx"
     },
     desktop: {
       runtime: "electron",
       flavor: "desktop",
-      entry: "apps/desktop/main.cjs"
+      entry: "playground/desktop/main/desktop-main.cjs"
     }
   }
 } satisfies FrameworkManifest;

@@ -30,6 +30,7 @@ npm --workspace fullstack-uniframe run android:open
 apps/
   api/       Express API
   web/       Vue + Vite web uygulamasi
-  desktop/   Electron wrapper
+  desktop/   Electron main + desktop renderer UI
+  android/   Android/Capacitor rehberi
 capacitor.config.ts
 ```

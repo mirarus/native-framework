@@ -16,7 +16,7 @@ export const appInfo: AppInfo = {
   product: manifest.name,
   version: manifest.version,
   promise: "Tek proje, coklu platform, ortak mantik.",
-  targets: ["api", "web-react", "web-vanilla", "mobile", "desktop"]
+  targets: ["api", "web-react", "web-vue", "web-vanilla", "mobile", "desktop"]
 };
 
 export function createGreeting(platform: string): Greeting {
@@ -30,9 +30,10 @@ export function listCapabilities(): string[] {
   return [
     "TypeScript core",
     "React UI",
+    "Vue UI",
     "Vanilla JS UI",
     "Express API",
-    "Electron desktop wrapper",
+    "Electron desktop renderer",
     "Mobile-first app hedefi",
     "Shared contracts",
     "Adapter-ready architecture"
