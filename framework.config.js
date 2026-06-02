@@ -15,7 +15,9 @@ export default {
       port: 5175
     },
     desktop: {
-      flavor: "react",
+      defaultFlavor: "react",
+      reactPort: 5176,
+      vuePort: 5178,
       webPort: 5176
     }
   }

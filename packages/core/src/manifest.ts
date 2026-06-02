@@ -50,6 +50,16 @@ export const manifest = {
       runtime: "electron",
       flavor: "desktop",
       entry: "playground/desktop/main/desktop-main.cjs"
+    },
+    desktopReact: {
+      runtime: "electron",
+      flavor: "react",
+      entry: "playground/desktop/renderer-react/src/main.tsx"
+    },
+    desktopVue: {
+      runtime: "electron",
+      flavor: "vue",
+      entry: "playground/desktop/renderer/src/main.ts"
     }
   }
 } satisfies FrameworkManifest;

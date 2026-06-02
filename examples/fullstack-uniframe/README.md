@@ -9,6 +9,9 @@ npm --workspace fullstack-uniframe run dev
 npm --workspace fullstack-uniframe run dev:api
 npm --workspace fullstack-uniframe run dev:web
 npm --workspace fullstack-uniframe run dev:desktop
+npm --workspace fullstack-uniframe run dev:desktop:react
+npm --workspace fullstack-uniframe run dev:desktop:vue
+npm --workspace fullstack-uniframe run build:desktop
 npm --workspace fullstack-uniframe run build
 ```
 
@@ -28,9 +31,12 @@ npm --workspace fullstack-uniframe run android:open
 
 ```txt
 apps/
-  api/       Express API
-  web/       Vue + Vite web uygulamasi
-  desktop/   Electron main + desktop renderer UI
-  android/   Android/Capacitor rehberi
+  api/                    Express API
+  web/                    Vue + Vite web uygulamasi
+  desktop/
+    main.cjs              Electron main process
+    renderer/             Vue desktop renderer
+    renderer-react/       React desktop renderer
+  android/                Android/Capacitor rehberi
 capacitor.config.ts
 ```

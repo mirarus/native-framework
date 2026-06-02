@@ -1,6 +1,6 @@
 # Uniframe
 
-Tek proje altinda TypeScript API, React web, Vue web, vanilla TypeScript web, mobile-first hedef ve Electron desktop wrapper sunan profesyonel framework workspace'i.
+Tek proje altinda TypeScript API, React web, Vue web, vanilla TypeScript web, mobile-first hedef ve React/Vue Electron desktop wrapper sunan profesyonel framework workspace'i.
 
 Uniframe'in hedefi ayni domain modelini, contract'lari ve gelistirici deneyimini koruyarak bir urunu farkli platformlarda tek cati altinda calistirmaktir.
 
@@ -18,7 +18,7 @@ npm run check
 - Core runtime `packages/core/src` altinda TypeScript ile yazilir.
 - Adapter modeli `packages/adapters/src` altinda genisletilir.
 - Vite entegrasyonu `packages/vite/src` altinda reusable library olarak bulunur.
-- React ve mobile hedefleri `.tsx`, vanilla hedefi `.ts`, API hedefi `.ts` kullanir.
+- React, mobile ve React desktop hedefleri `.tsx`, vanilla hedefi `.ts`, API hedefi `.ts` kullanir.
 - Vue hedefi `.vue` single-file component ve `vue-tsc` typecheck kullanir.
 - `@uniframe/core`, `@uniframe/adapters` ve `@uniframe/vite` alias'lari hazirdir.
 - VS Code icin `.vscode/settings.json`, task ve extension onerileri eklenmistir.
@@ -36,13 +36,15 @@ npm run ci
 ## Gelistirme
 
 ```bash
-npm run dev              # API + React web + vanilla web
+npm run dev              # API + React web + Vue web + vanilla web
 npm run dev:api          # http://localhost:4100
 npm run dev:web:react    # http://localhost:5173
 npm run dev:web:vanilla  # http://localhost:5174
 npm run dev:web:vue      # http://localhost:5177
 npm run dev:mobile       # http://localhost:5175
-npm run dev:desktop      # Electron wrapper + React web
+npm run dev:desktop      # Electron wrapper + React desktop
+npm run dev:desktop:react
+npm run dev:desktop:vue
 npm run dev:example      # examples/hello-uniframe
 npm run dev:example:fullstack
 npm run dev:example:fullstack:desktop
@@ -61,6 +63,8 @@ npm run clean            # Build ciktilarini temizler
 npm run build:web -- --flavor react
 npm run build:web -- --flavor vanilla
 npm run build:web -- --flavor vue
+npm run build:desktop:react
+npm run build:desktop:vue
 npm run build:packages
 npm run build:example
 npm run build
@@ -78,13 +82,14 @@ playground/
   desktop/
     main/          Electron main process
     preload/       Guvenli bridge
-    renderer/      Desktop UI
+    renderer/      Vue desktop UI
+    renderer-react/ React desktop UI
 examples/
   hello-uniframe/  Framework paketlerini library gibi kullanan ornek proje
   fullstack-uniframe/
     apps/api/      Example Express API
     apps/web/      Example Vue web
-    apps/desktop/  Example Electron main + desktop renderer UI
+    apps/desktop/  Example Electron main + React/Vue desktop renderer UI
     apps/android/  Android/Capacitor rehberi
 packages/
   adapters/        Platform adapter ornekleri
@@ -110,7 +115,7 @@ Uniframe'in ana ilkesi tek cati, coklu hedef:
 - UI React, Vue veya vanilla TypeScript ile yazilabilir.
 - API ayni repo icinde yasayan Express route'lari ile calisir.
 - Core contract dosyalari tum hedefler tarafindan import edilir.
-- Desktop hedefi Electron ile ayni web uygulamasini masaustune tasir.
+- Desktop hedefi Electron ile kendi React veya Vue renderer UI alanini masaustune tasir.
 - Mobile hedefi bugun mobile-first web/PWA olarak calisir; Expo/React Native adapter'i icin ayni CLI hedefi korunur.
 
 Bu paket artik sadece MVP degil; CI, lint, typecheck, test, manifest, publish-ready library paketleri, ornek proje, dokumantasyon ve guvenlik hijyeni olan genisletilebilir bir framework temelidir.
@@ -123,6 +128,9 @@ Bu paket artik sadece MVP degil; CI, lint, typecheck, test, manifest, publish-re
 npm --workspace fullstack-uniframe run dev:api
 npm --workspace fullstack-uniframe run dev:web
 npm --workspace fullstack-uniframe run dev:desktop
+npm --workspace fullstack-uniframe run dev:desktop:react
+npm --workspace fullstack-uniframe run dev:desktop:vue
+npm --workspace fullstack-uniframe run build:desktop
 npm --workspace fullstack-uniframe run build
 ```
 

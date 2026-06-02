@@ -17,7 +17,9 @@ describe("shared contracts", () => {
       "webVanilla",
       "webVue",
       "mobile",
-      "desktop"
+      "desktop",
+      "desktopReact",
+      "desktopVue"
     ]);
   });
 

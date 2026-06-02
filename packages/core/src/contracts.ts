@@ -16,7 +16,16 @@ export const appInfo: AppInfo = {
   product: manifest.name,
   version: manifest.version,
   promise: "Tek proje, coklu platform, ortak mantik.",
-  targets: ["api", "web-react", "web-vue", "web-vanilla", "mobile", "desktop"]
+  targets: [
+    "api",
+    "web-react",
+    "web-vue",
+    "web-vanilla",
+    "mobile",
+    "desktop",
+    "desktop-react",
+    "desktop-vue"
+  ]
 };
 
 export function createGreeting(platform: string): Greeting {

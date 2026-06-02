@@ -21,6 +21,10 @@ interface FrameworkConfig {
       port?: number;
     };
     desktop?: {
+      defaultFlavor?: "react" | "vue";
+      flavor?: "react" | "vue";
+      reactPort?: number;
+      vuePort?: number;
       webPort?: number;
     };
   };
@@ -122,10 +126,27 @@ function appFor(flavor: string) {
   return "web-react";
 }
 
+function desktopAppFor(flavor: string) {
+  if (flavor === "vue") return "desktop/renderer";
+  return "desktop/renderer-react";
+}
+
 function portForWebFlavor(flavor: string) {
   if (flavor === "vanilla") return config.targets?.web?.vanillaPort ?? 5174;
   if (flavor === "vue") return config.targets?.web?.vuePort ?? 5177;
   return config.targets?.web?.reactPort ?? 5173;
+}
+
+function desktopFlavor() {
+  return getFlag(
+    "flavor",
+    config.targets?.desktop?.defaultFlavor ?? config.targets?.desktop?.flavor ?? "react"
+  );
+}
+
+function portForDesktopFlavor(flavor: string) {
+  if (flavor === "vue") return config.targets?.desktop?.vuePort ?? 5178;
+  return config.targets?.desktop?.reactPort ?? config.targets?.desktop?.webPort ?? 5176;
 }
 
 async function dev(targetName?: string) {
@@ -156,16 +177,18 @@ async function dev(targetName?: string) {
   }
 
   if (targetName === "desktop") {
+    const flavor = desktopFlavor();
+    const port = portForDesktopFlavor(flavor);
     await runMany([
       {
-        name: "desktop-web",
+        name: `desktop-${flavor}`,
         color: "green",
-        cmd: `${npxCmd} vite --config playground/desktop/renderer/vite.config.ts --host 127.0.0.1 --port ${config.targets?.desktop?.webPort ?? 5176}`
+        cmd: `${npxCmd} vite --config playground/${desktopAppFor(flavor)}/vite.config.ts --host 127.0.0.1 --port ${port}`
       },
       {
         name: "electron",
         color: "magenta",
-        cmd: `tsx playground/desktop/main/wait-and-open.ts ${config.targets?.desktop?.webPort ?? 5176}`
+        cmd: `tsx playground/desktop/main/wait-and-open.ts ${port}`
       }
     ]);
     return;
@@ -180,7 +203,9 @@ async function build(targetName?: string) {
       { name: "web-react", color: "green", cmd: `tsx ${cliPath} build web --flavor react` },
       { name: "web-vue", color: "blue", cmd: `tsx ${cliPath} build web --flavor vue` },
       { name: "web-vanilla", color: "yellow", cmd: `tsx ${cliPath} build web --flavor vanilla` },
-      { name: "mobile", color: "blue", cmd: `tsx ${cliPath} build mobile` }
+      { name: "mobile", color: "blue", cmd: `tsx ${cliPath} build mobile` },
+      { name: "desktop-react", color: "green", cmd: `tsx ${cliPath} build desktop --flavor react` },
+      { name: "desktop-vue", color: "blue", cmd: `tsx ${cliPath} build desktop --flavor vue` }
     ]);
     return;
   }
@@ -202,9 +227,8 @@ async function build(targetName?: string) {
   }
 
   if (targetName === "desktop") {
-    console.log(
-      "Desktop dev wrapper hazir. Paketleme icin Electron Forge veya electron-builder adapter eklenebilir."
-    );
+    const flavor = desktopFlavor();
+    run(npxCmd, viteArgs(desktopAppFor(flavor), "build"));
     return;
   }
 
@@ -234,6 +258,9 @@ function check() {
     "playground/mobile-react/vite.config.ts",
     "playground/desktop/main/desktop-main.cjs",
     "playground/desktop/preload/desktop-preload.cjs",
+    "playground/desktop/renderer-react/src/app/app-root.tsx",
+    "playground/desktop/renderer-react/src/main.tsx",
+    "playground/desktop/renderer-react/vite.config.ts",
     "playground/desktop/renderer/src/app/app-root.vue",
     "playground/desktop/renderer/vite.config.ts",
     "packages/adapters/src/index.ts",
@@ -256,6 +283,9 @@ function check() {
     "examples/fullstack-uniframe/apps/web/src/app/app-root.vue",
     "examples/fullstack-uniframe/apps/web/vite.config.ts",
     "examples/fullstack-uniframe/apps/desktop/main.cjs",
+    "examples/fullstack-uniframe/apps/desktop/renderer-react/src/app/app-root.tsx",
+    "examples/fullstack-uniframe/apps/desktop/renderer-react/src/main.tsx",
+    "examples/fullstack-uniframe/apps/desktop/renderer-react/vite.config.ts",
     "examples/fullstack-uniframe/apps/desktop/renderer/src/app/app-root.vue",
     "examples/fullstack-uniframe/apps/desktop/renderer/vite.config.ts",
     "examples/fullstack-uniframe/apps/android/README.md",
@@ -325,9 +355,11 @@ function clean() {
     "playground/web-vue/dist",
     "playground/web-vanilla/dist",
     "playground/mobile-react/dist",
+    "playground/desktop/renderer-react/dist",
     "playground/desktop/renderer/dist",
     "examples/hello-uniframe/dist",
     "examples/fullstack-uniframe/apps/web/dist",
+    "examples/fullstack-uniframe/apps/desktop/renderer-react/dist",
     "examples/fullstack-uniframe/apps/desktop/renderer/dist",
     "examples/fullstack-uniframe/dist",
     "packages/core/dist",
@@ -361,7 +393,8 @@ function info() {
   console.log(`- web vanilla: ${config.targets?.web?.vanillaPort ?? 5174}`);
   console.log(`- web vue: ${config.targets?.web?.vuePort ?? 5177}`);
   console.log(`- mobile: ${config.targets?.mobile?.port ?? 5175}`);
-  console.log(`- desktop web: ${config.targets?.desktop?.webPort ?? 5176}`);
+  console.log(`- desktop react: ${config.targets?.desktop?.reactPort ?? 5176}`);
+  console.log(`- desktop vue: ${config.targets?.desktop?.vuePort ?? 5178}`);
 }
 
 function help() {
@@ -375,7 +408,9 @@ Komutlar:
   npm run dev:web:vue         Vue + TypeScript web
   npm run dev:web:vanilla     Vanilla TypeScript web
   npm run dev:mobile          Mobile-first React + TypeScript hedefi
-  npm run dev:desktop         Electron desktop wrapper
+  npm run dev:desktop         Electron desktop wrapper (varsayilan React)
+  npm run dev:desktop:react   React desktop renderer
+  npm run dev:desktop:vue     Vue desktop renderer
   npm run build               Web ve mobile build
   npm run clean               Build ciktilarini temizle
   npm run check               Proje saglik kontrolu

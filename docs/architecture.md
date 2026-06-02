@@ -12,7 +12,7 @@ Uniframe, tek repo icinde birden fazla calisma hedefini ayni domain modeliyle yo
 - `playground/web-vue/src`: Vue + TypeScript web hedefi.
 - `playground/web-vanilla/src`: Framework kullanmadan vanilla TypeScript web hedefi.
 - `playground/mobile-react/src`: Mobile-first React + TypeScript hedefi.
-- `playground/desktop/`: Electron main, preload ve renderer UI alanlari.
+- `playground/desktop/`: Electron main, preload, Vue renderer ve React renderer UI alanlari.
 - `packages/cli/src`: Tum hedefleri tek komut seti altinda toplayan TypeScript Uniframe CLI.
 
 ## Ilkeler
@@ -28,5 +28,5 @@ Uniframe, tek repo icinde birden fazla calisma hedefini ayni domain modeliyle yo
 - Yeni hedef eklemek icin `packages/core/src/manifest.ts`, `framework.config.js` ve `packages/cli/src/uniframe.ts` birlikte guncellenir.
 - Runtime adapter'lari `packages/adapters/src` uzerinden ortak API ile disariya acilir.
 - Yeni Vite tabanli hedefler `@uniframe/vite` helper'i ile ortak config desenini kullanir.
-- Desktop paketleme icin Electron Forge veya electron-builder adapter'i CLI altina eklenebilir.
+- Desktop paketleme icin Electron Forge veya electron-builder adapter'i CLI altina eklenebilir; renderer React veya Vue olarak secilebilir.
 - Mobile native hedefi icin `playground/mobile-react` adapter/template yapisina tasinabilir; core contract yapisi degismez.

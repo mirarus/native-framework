@@ -24,6 +24,6 @@ describe("uniframe cli", () => {
 
     expect(output).toContain("Uniframe 0.1.0");
     expect(output).toContain("webReact");
-    expect(output).toContain("desktop web");
+    expect(output).toContain("desktop react");
   });
 });

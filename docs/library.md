@@ -33,10 +33,12 @@ import { defineUniframeViteConfig } from "@uniframe/vite";
 ## Ornek Proje
 
 `examples/hello-uniframe` framework paketlerini minimal library ornegi olarak kullanir.
-`examples/fullstack-uniframe` ise ayni paketleri API, web, desktop ve Android hedefleriyle tam proje gibi kullanir.
+`examples/fullstack-uniframe` ise ayni paketleri API, web, React desktop, Vue desktop ve Android hedefleriyle tam proje gibi kullanir.
 
 ```bash
 npm run build:example
 npm run dev:example
 npm run dev:example:fullstack
+npm --workspace fullstack-uniframe run dev:desktop:react
+npm --workspace fullstack-uniframe run dev:desktop:vue
 ```
