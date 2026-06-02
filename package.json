@@ -1,6 +1,6 @@
 {
   "name": "native-framework",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": false,
   "description": "Tek cati altinda API, web, desktop, mobile, React, Vue ve vanilla TypeScript destekli framework workspace'i.",
   "type": "module",
