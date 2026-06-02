@@ -1,0 +1,45 @@
+import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
+import { createStorage, fetchHealth } from "../../../shared/platform.js";
+
+const storage = createStorage("vanilla");
+const greeting = createGreeting("Vanilla Web");
+const title = document.querySelector("#title");
+const message = document.querySelector("#message");
+const counter = document.querySelector("#counter");
+const status = document.querySelector("#status");
+const capabilities = document.querySelector("#capabilities");
+
+let count = storage.get("count", 0);
+
+title.textContent = greeting.title;
+message.textContent = greeting.message;
+
+function renderCounter() {
+  counter.textContent = `Sayaç ${count}`;
+}
+
+counter.addEventListener("click", () => {
+  count = storage.set("count", count + 1);
+  renderCounter();
+});
+
+capabilities.innerHTML = listCapabilities()
+  .map(
+    (item) => `
+      <article>
+        <span></span>
+        <h2>${item}</h2>
+        <p>Bu yetenek ayni shared contract uzerinden gelir.</p>
+      </article>
+    `
+  )
+  .join("");
+
+fetchHealth().then((health) => {
+  if (health.ok) {
+    status.textContent = "API bagli";
+    status.classList.add("good");
+  }
+});
+
+renderCounter();

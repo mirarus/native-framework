@@ -1,0 +1,32 @@
+{
+  "name": "uniframe-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tek cati altinda API, web, desktop, mobile, React ve vanilla JS destekli framework starter.",
+  "type": "module",
+  "bin": {
+    "uniframe": "./packages/cli/uniframe.js"
+  },
+  "scripts": {
+    "dev": "node packages/cli/uniframe.js dev",
+    "dev:api": "node packages/cli/uniframe.js dev api",
+    "dev:web": "node packages/cli/uniframe.js dev web",
+    "dev:web:react": "node packages/cli/uniframe.js dev web --flavor react",
+    "dev:web:vanilla": "node packages/cli/uniframe.js dev web --flavor vanilla",
+    "dev:mobile": "node packages/cli/uniframe.js dev mobile",
+    "dev:desktop": "node packages/cli/uniframe.js dev desktop",
+    "build": "node packages/cli/uniframe.js build",
+    "build:web": "node packages/cli/uniframe.js build web",
+    "check": "node packages/cli/uniframe.js check"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^5.0.0",
+    "concurrently": "^9.2.1",
+    "electron": "^38.0.0",
+    "express": "^5.1.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "vite": "^7.1.5"
+  },
+  "devDependencies": {}
+}
