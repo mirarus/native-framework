@@ -4,6 +4,10 @@
   "private": true,
   "description": "Tek cati altinda API, web, desktop, mobile, React ve vanilla JS destekli framework starter.",
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.0.0"
+  },
   "bin": {
     "uniframe": "./packages/cli/uniframe.js"
   },
@@ -22,11 +26,10 @@
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
     "concurrently": "^9.2.1",
-    "electron": "^38.0.0",
+    "electron": "^42.3.2",
     "express": "^5.1.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "vite": "^7.1.5"
-  },
-  "devDependencies": {}
+  }
 }

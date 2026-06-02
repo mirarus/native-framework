@@ -4,6 +4,8 @@ Tek proje altinda API, React web, vanilla JS web, mobile-first hedef ve Electron
 
 ## Kurulum
 
+Gereksinim: Node.js 22.12+ ve npm 10+.
+
 ```bash
 npm install
 npm run check
