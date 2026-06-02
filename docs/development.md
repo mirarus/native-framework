@@ -8,6 +8,21 @@ npm run check
 npm run dev
 ```
 
+## Yeni Proje Olusturma
+
+```bash
+npx create-uniframe my-app
+cd my-app
+npm install
+npm run dev:web:react
+```
+
+Repo icinde test etmek icin:
+
+```bash
+npm run create -- my-app
+```
+
 ## Kalite Kapisi
 
 ```bash
@@ -64,6 +79,7 @@ examples/
 packages/
   core/src
   adapters/src
+  create-uniframe
   platforms/src
   vite/src
   cli/src

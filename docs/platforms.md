@@ -19,6 +19,7 @@ import { formatPlatformMatrix, platformMatrix } from "@uniframe/platforms";
 
 ```bash
 npm run platforms
+npx create-uniframe my-app
 ```
 
 Bu komut her hedef icin runtime, UI tipi ve calistirma komutunu yazdirir.

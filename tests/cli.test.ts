@@ -36,4 +36,11 @@ describe("uniframe cli", () => {
     expect(output).toContain("desktop-electron-react");
     expect(output).toContain("web-vite-vue");
   });
+
+  it("documents create commands in help output", () => {
+    const output = runCli("help");
+
+    expect(output).toContain("npx create-uniframe app");
+    expect(output).toContain("uniframe create app");
+  });
 });

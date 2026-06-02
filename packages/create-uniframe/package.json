@@ -1,0 +1,15 @@
+{
+  "name": "create-uniframe",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "bin": {
+    "create-uniframe": "./create-uniframe.js"
+  },
+  "files": [
+    "create-uniframe.js"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

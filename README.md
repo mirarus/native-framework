@@ -8,6 +8,22 @@ Uniframe'in hedefi ayni domain modelini, contract'lari ve gelistirici deneyimini
 
 Gereksinim: Node.js 22.12+ ve npm 10+.
 
+Yeni proje:
+
+```bash
+npx create-uniframe my-app
+cd my-app
+npm install
+npm run dev:web:react
+```
+
+Repo icinden ayni scaffold:
+
+```bash
+npm run create -- my-app
+uniframe create my-app
+```
+
 ```bash
 npm install
 npm run check
@@ -125,6 +141,7 @@ packages/
   cli/             TypeScript kaynakli Uniframe komut satiri
   core/            Manifest, contract ve ortak runtime tipleri
   platforms/       @capacitor/electron/react/vite/vue/node matrix
+  create-uniframe/ npx ile proje olusturan scaffold paketi
   vite/            Vite helper library
 framework.config.js
 ```

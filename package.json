@@ -39,6 +39,7 @@
     "check": "tsx packages/cli/src/uniframe.ts check",
     "ci": "npm run check && npm run lint && npm run typecheck && npm run test && npm run build && npm run build:example",
     "clean": "tsx packages/cli/src/uniframe.ts clean",
+    "create": "node packages/create-uniframe/create-uniframe.js",
     "format": "prettier . --write",
     "format:check": "prettier . --check",
     "info": "tsx packages/cli/src/uniframe.ts info",

@@ -4,6 +4,7 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { listTargetKeys, manifest } from "../../core/src/index";
+import { createProject, parseCreateArgs } from "../../create-uniframe/create-uniframe.js";
 import { formatPlatformMatrix, platformMatrix } from "../../platforms/src/index";
 
 interface FrameworkConfig {
@@ -269,6 +270,8 @@ function check() {
     "packages/adapters/src/node.ts",
     "packages/adapters/src/types.ts",
     "packages/adapters/src/web.ts",
+    "packages/create-uniframe/create-uniframe.js",
+    "packages/create-uniframe/package.json",
     "packages/platforms/package.json",
     "packages/platforms/src/adapters/capacitor.ts",
     "packages/platforms/src/adapters/electron.ts",
@@ -285,6 +288,7 @@ function check() {
     "packages/cli/src/uniframe.ts",
     "tests/contracts.test.ts",
     "tests/cli.test.ts",
+    "tests/create.test.ts",
     "tests/platforms.test.ts",
     "examples/hello-uniframe/package.json",
     "examples/hello-uniframe/src/app/app-root.vue",
@@ -319,6 +323,7 @@ function check() {
     "build:example",
     "build:packages",
     "check",
+    "create",
     "mobile:sync",
     "platforms"
   ].filter((script) => !packageJson.scripts?.[script]);
@@ -434,6 +439,14 @@ function platforms() {
   }
 }
 
+function create() {
+  const options = parseCreateArgs(args.slice(1));
+  const { projectName, targetDir } = createProject(options);
+
+  console.log(`Uniframe projesi olusturuldu: ${projectName}`);
+  console.log(targetDir);
+}
+
 function help() {
   console.log(`
 Uniframe CLI
@@ -452,6 +465,8 @@ Komutlar:
   npm run build:mobile        Mobile React build
   npm run mobile:sync         Capacitor native sync
   npm run platforms           Platform matrix bilgisini yazdir
+  npx create-uniframe app     Yeni Uniframe projesi olustur
+  uniframe create app         CLI uzerinden yeni proje olustur
   npm run clean               Build ciktilarini temizle
   npm run check               Proje saglik kontrolu
   npm run info                Framework bilgisini yazdir
@@ -467,6 +482,7 @@ if (command === "dev") await dev(target);
 else if (command === "build") await build(target);
 else if (command === "check") check();
 else if (command === "clean") clean();
+else if (command === "create") create();
 else if (command === "info") info();
 else if (command === "platforms") platforms();
 else help();
