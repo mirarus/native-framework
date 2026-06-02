@@ -28,9 +28,26 @@ npm run dev:mobile
 npm run dev:desktop
 ```
 
+## Dosya Yapisi
+
+```txt
+apps/
+  api/src/server.ts
+  web-react/src/main.tsx
+  web-react/src/app/App.tsx
+  web-vanilla/src/main.ts
+  mobile-react/src/main.tsx
+  mobile-react/src/app/App.tsx
+packages/
+  core/src
+  adapters/src
+  cli/src
+```
+
 ## Notlar
 
 - Node.js 22.12+ gerekir.
 - Build ciktilari `apps/*/dist` altina gider ve git'e alinmaz.
 - `npm run clean` build ciktilarini temizler.
 - `npm run info` framework manifest ve port bilgisini yazdirir.
+- VS Code task'lari `.vscode/tasks.json` icinde hazirdir.

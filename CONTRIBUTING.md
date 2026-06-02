@@ -3,11 +3,12 @@
 ## Akis
 
 1. Degisiklikleri kucuk ve odakli tutun.
-2. Yeni hedef veya adapter eklerken `shared/manifest.js` dosyasini guncelleyin.
-3. PR acmadan once `npm run ci` calistirin.
+2. Yeni hedef eklerken `packages/core/src/manifest.ts` dosyasini guncelleyin.
+3. Yeni adapter eklerken `packages/adapters/src` altinda `RuntimeAdapter` uygulayin.
+4. PR acmadan once `npm run ci` calistirin.
 
 ## Kod Stili
 
-- JavaScript module syntax kullanilir.
-- UI hedefleri ortak contract'lari `shared/` altindan import eder.
+- TypeScript ve ESM module syntax kullanilir.
+- UI hedefleri ortak contract'lari `@uniframe/core` alias'i ile import eder.
 - Platforma ozel davranis adapter seviyesinde tutulur.

@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
-import { fetchHealth } from "../../../shared/platform.js";
-import "./style.css";
+import { createGreeting, fetchHealth, listCapabilities } from "@uniframe/core";
+import "../style.css";
 
-function App() {
+export function App() {
   const [health, setHealth] = useState({ ok: false });
   const greeting = createGreeting("Mobile");
 
@@ -32,5 +30,3 @@ function App() {
     </main>
   );
 }
-
-createRoot(document.getElementById("root")).render(<App />);

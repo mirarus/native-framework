@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { createRoot } from "react-dom/client";
-import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
-import { createStorage, fetchHealth } from "../../../shared/platform.js";
-import "./style.css";
+import { createGreeting, createStorage, fetchHealth, listCapabilities } from "@uniframe/core";
+import "../style.css";
 
 const storage = createStorage("react");
 
-function App() {
+export function App() {
   const [health, setHealth] = useState({ ok: false, service: "api" });
   const [count, setCount] = useState(() => storage.get("count", 0));
   const greeting = createGreeting("React Web");
@@ -26,7 +24,7 @@ function App() {
         <h1>{greeting.title}</h1>
         <p>{greeting.message}</p>
         <div className="actions">
-          <button onClick={increment}>Sayaç {count}</button>
+          <button onClick={increment}>Sayac {count}</button>
           <span className={health.ok ? "status good" : "status"}>
             {health.ok ? "API bagli" : "API bekleniyor"}
           </span>
@@ -45,5 +43,3 @@ function App() {
     </main>
   );
 }
-
-createRoot(document.getElementById("root")).render(<App />);

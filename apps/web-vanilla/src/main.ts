@@ -1,5 +1,4 @@
-import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
-import { createStorage, fetchHealth } from "../../../shared/platform.js";
+import { createGreeting, createStorage, fetchHealth, listCapabilities } from "@uniframe/core";
 
 const storage = createStorage("vanilla");
 const greeting = createGreeting("Vanilla Web");
@@ -15,7 +14,7 @@ title.textContent = greeting.title;
 message.textContent = greeting.message;
 
 function renderCounter() {
-  counter.textContent = `Sayaç ${count}`;
+  counter.textContent = `Sayac ${count}`;
 }
 
 counter.addEventListener("click", () => {
@@ -44,10 +43,10 @@ fetchHealth().then((health) => {
 
 renderCounter();
 
-function select(selector) {
+function select(selector: string): HTMLElement {
   const element = document.querySelector(selector);
 
-  if (!element) {
+  if (!(element instanceof HTMLElement)) {
     throw new Error(`Beklenen DOM elemani bulunamadi: ${selector}`);
   }
 

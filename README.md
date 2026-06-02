@@ -1,6 +1,6 @@
 # Uniframe
 
-Tek proje altinda API, React web, vanilla JS web, mobile-first hedef ve Electron desktop wrapper sunan profesyonel framework starter'i.
+Tek proje altinda TypeScript API, React web, vanilla TypeScript web, mobile-first hedef ve Electron desktop wrapper sunan profesyonel framework starter'i.
 
 Uniframe'in hedefi ayni domain modelini, contract'lari ve gelistirici deneyimini koruyarak bir urunu farkli platformlarda tek cati altinda calistirmaktir.
 
@@ -12,6 +12,14 @@ Gereksinim: Node.js 22.12+ ve npm 10+.
 npm install
 npm run check
 ```
+
+## TypeScript ve VS Code
+
+- Core runtime `packages/core/src` altinda TypeScript ile yazilir.
+- Adapter modeli `packages/adapters/src` altinda genisletilir.
+- React ve mobile hedefleri `.tsx`, vanilla hedefi `.ts`, API hedefi `.ts` kullanir.
+- `@uniframe/core` ve `@uniframe/adapters` alias'lari tsconfig ve Vite tarafinda hazirdir.
+- VS Code icin `.vscode/settings.json`, task ve extension onerileri eklenmistir.
 
 ## Kalite Kapisi
 
@@ -53,20 +61,22 @@ npm run build
 
 ```txt
 apps/
-  api/             Express API
-  web-react/       React web hedefi
-  web-vanilla/     Vanilla JS web hedefi
-  mobile-react/    Mobile-first React hedefi
+  api/             TypeScript Express API
+  web-react/       React + TypeScript web hedefi
+  web-vanilla/     Vanilla TypeScript web hedefi
+  mobile-react/    Mobile-first React + TypeScript hedefi
   desktop/         Electron wrapper
 packages/
-  cli/             Uniframe komut satiri
-shared/            Ortak contract ve platform adapter kodlari
+  adapters/        Platform adapter ornekleri
+  cli/             TypeScript kaynakli Uniframe komut satiri
+  core/            Manifest, contract ve ortak runtime tipleri
 framework.config.js
 ```
 
 Detaylar:
 
 - [Mimari](docs/architecture.md)
+- [Adapter Rehberi](docs/adapters.md)
 - [Gelistirme Rehberi](docs/development.md)
 - [Katki Rehberi](CONTRIBUTING.md)
 - [Guvenlik](SECURITY.md)
@@ -77,7 +87,7 @@ Uniframe'in ana ilkesi tek cati, coklu hedef:
 
 - UI React veya vanilla JS ile yazilabilir.
 - API ayni repo icinde yasayan Express route'lari ile calisir.
-- Shared contract dosyalari tum hedefler tarafindan import edilir.
+- Core contract dosyalari tum hedefler tarafindan import edilir.
 - Desktop hedefi Electron ile ayni web uygulamasini masaustune tasir.
 - Mobile hedefi bugun mobile-first web/PWA olarak calisir; Expo/React Native adapter'i icin ayni CLI hedefi korunur.
 

@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { appInfo, createGreeting, listCapabilities } from "../shared/contracts.js";
-import { listTargetKeys, manifest } from "../shared/manifest.js";
+import {
+  appInfo,
+  createGreeting,
+  listCapabilities,
+  listTargetKeys,
+  manifest
+} from "@uniframe/core";
 
 describe("shared contracts", () => {
   it("exposes stable application metadata", () => {
@@ -17,6 +22,7 @@ describe("shared contracts", () => {
   });
 
   it("keeps core capabilities visible to all targets", () => {
+    expect(listCapabilities()).toContain("TypeScript core");
     expect(listCapabilities()).toContain("React UI");
     expect(listCapabilities()).toContain("Vanilla JS UI");
     expect(listCapabilities()).toContain("Express API");
