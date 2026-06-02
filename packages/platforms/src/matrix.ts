@@ -1,4 +1,4 @@
-import { manifest } from "@uniframe/core";
+import { manifest } from "../../core/src/index.ts";
 import { capacitorReactAdapter } from "./adapters/capacitor";
 import { electronReactAdapter, electronVueAdapter } from "./adapters/electron";
 import { nodeApiAdapter } from "./adapters/node";
