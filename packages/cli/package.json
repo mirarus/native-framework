@@ -4,14 +4,17 @@
   "private": false,
   "type": "module",
   "bin": {
-    "uniframe": "./uniframe.js"
+    "uniframe": "./dist/uniframe.js"
   },
   "files": [
-    "src",
-    "uniframe.js"
+    "dist"
   ],
+  "scripts": {
+    "build": "tsup src/uniframe.ts --format esm --platform node --out-dir dist --clean && node scripts/add-shebang.cjs"
+  },
   "dependencies": {
     "@uniframe/core": "0.1.0",
+    "@uniframe/platforms": "0.1.0",
     "create-uniframe": "0.1.0",
     "concurrently": "^9.2.1",
     "tsx": "^4.22.4",

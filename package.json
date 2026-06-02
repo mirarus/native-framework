@@ -1,7 +1,7 @@
 {
   "name": "uniframe-starter",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "description": "Tek cati altinda API, web, desktop, mobile, React, Vue ve vanilla TypeScript destekli framework workspace'i.",
   "type": "module",
   "engines": {
@@ -31,7 +31,7 @@
     "dev:example:fullstack:desktop": "npm run build:packages && npm --workspace fullstack-uniframe run dev:desktop",
     "build": "npm run build:packages && tsx packages/cli/src/uniframe.ts build",
     "build:example": "npm run build:packages && npm --workspace examples/hello-uniframe run build && npm --workspace fullstack-uniframe run build",
-    "build:packages": "npm --workspace @uniframe/core run build && npm --workspace @uniframe/adapters run build && npm --workspace @uniframe/vite run build && npm --workspace @uniframe/platforms run build",
+    "build:packages": "npm --workspace @uniframe/core run build && npm --workspace @uniframe/adapters run build && npm --workspace @uniframe/vite run build && npm --workspace @uniframe/platforms run build && npm --workspace @uniframe/cli run build",
     "build:desktop:react": "tsx packages/cli/src/uniframe.ts build desktop --flavor react",
     "build:desktop:vue": "tsx packages/cli/src/uniframe.ts build desktop --flavor vue",
     "build:mobile": "tsx packages/cli/src/uniframe.ts build mobile",

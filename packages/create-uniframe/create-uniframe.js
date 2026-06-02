@@ -214,7 +214,11 @@ function main() {
   console.log("  npm run dev:api");
 }
 
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+const isDirectCreateBin =
+  process.argv[1] === fileURLToPath(import.meta.url) &&
+  fileURLToPath(import.meta.url).endsWith("create-uniframe.js");
+
+if (isDirectCreateBin) {
   try {
     main();
   } catch (error) {

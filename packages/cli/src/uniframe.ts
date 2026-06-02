@@ -1,7 +1,7 @@
 #!/usr/bin/env tsx
 import { spawn } from "node:child_process";
 import { existsSync, readFileSync, rmSync } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { listTargetKeys, manifest } from "../../core/src/index";
 import { createProject, parseCreateArgs } from "../../create-uniframe/create-uniframe.js";
@@ -44,7 +44,7 @@ interface ParallelCommand {
   cmd: string;
 }
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
+const root = process.cwd();
 const configPath = resolve(root, "framework.config.js");
 const config: FrameworkConfig = existsSync(configPath)
   ? ((await import(pathToFileURL(configPath).href)).default as FrameworkConfig)
@@ -62,7 +62,7 @@ const getFlag = (name: string, fallback: string): string => {
 
 const npxCmd = process.platform === "win32" ? "npx.cmd" : "npx";
 const isWindows = process.platform === "win32";
-const cliPath = resolve(root, "packages/cli/src/uniframe.ts");
+const cliPath = fileURLToPath(import.meta.url);
 
 function run(
   cmd: string,
@@ -286,6 +286,7 @@ function check() {
     "packages/core/src/manifest.ts",
     "packages/core/src/platform.ts",
     "packages/cli/src/uniframe.ts",
+    "packages/cli/scripts/add-shebang.cjs",
     "tests/contracts.test.ts",
     "tests/cli.test.ts",
     "tests/create.test.ts",

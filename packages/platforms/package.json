@@ -1,7 +1,7 @@
 {
   "name": "@uniframe/platforms",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -16,6 +16,9 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts --clean"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@uniframe/core": "0.1.0"
   },
