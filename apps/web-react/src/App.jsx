@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
 import { createStorage, fetchHealth } from "../../../shared/platform.js";
@@ -27,7 +27,9 @@ function App() {
         <p>{greeting.message}</p>
         <div className="actions">
           <button onClick={increment}>Sayaç {count}</button>
-          <span className={health.ok ? "status good" : "status"}>{health.ok ? "API bagli" : "API bekleniyor"}</span>
+          <span className={health.ok ? "status good" : "status"}>
+            {health.ok ? "API bagli" : "API bekleniyor"}
+          </span>
         </div>
       </section>
 

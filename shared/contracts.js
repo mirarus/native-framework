@@ -1,5 +1,8 @@
+import { manifest } from "./manifest.js";
+
 export const appInfo = {
-  product: "Uniframe",
+  product: manifest.name,
+  version: manifest.version,
   promise: "Tek proje, coklu platform, ortak mantik.",
   targets: ["api", "web-react", "web-vanilla", "mobile", "desktop"]
 };

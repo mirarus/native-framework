@@ -3,11 +3,11 @@ import { createStorage, fetchHealth } from "../../../shared/platform.js";
 
 const storage = createStorage("vanilla");
 const greeting = createGreeting("Vanilla Web");
-const title = document.querySelector("#title");
-const message = document.querySelector("#message");
-const counter = document.querySelector("#counter");
-const status = document.querySelector("#status");
-const capabilities = document.querySelector("#capabilities");
+const title = select("#title");
+const message = select("#message");
+const counter = select("#counter");
+const status = select("#status");
+const capabilities = select("#capabilities");
 
 let count = storage.get("count", 0);
 
@@ -43,3 +43,13 @@ fetchHealth().then((health) => {
 });
 
 renderCounter();
+
+function select(selector) {
+  const element = document.querySelector(selector);
+
+  if (!element) {
+    throw new Error(`Beklenen DOM elemani bulunamadi: ${selector}`);
+  }
+
+  return element;
+}

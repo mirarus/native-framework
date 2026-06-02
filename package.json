@@ -21,7 +21,15 @@
     "dev:desktop": "node packages/cli/uniframe.js dev desktop",
     "build": "node packages/cli/uniframe.js build",
     "build:web": "node packages/cli/uniframe.js build web",
-    "check": "node packages/cli/uniframe.js check"
+    "check": "node packages/cli/uniframe.js check",
+    "ci": "npm run check && npm run lint && npm run typecheck && npm run test && npm run build",
+    "clean": "node packages/cli/uniframe.js clean",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "info": "node packages/cli/uniframe.js info",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",
@@ -31,5 +39,16 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "vite": "^7.1.5"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.16",
+    "@types/react-dom": "^19.2.3",
+    "eslint": "^10.4.1",
+    "globals": "^17.6.0",
+    "prettier": "^3.8.3",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.8"
   }
 }

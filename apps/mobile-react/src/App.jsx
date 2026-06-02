@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import { createGreeting, listCapabilities } from "../../../shared/contracts.js";
 import { fetchHealth } from "../../../shared/platform.js";
@@ -23,9 +23,11 @@ function App() {
         <strong>{health.ok ? "API bagli" : "API bekleniyor"}</strong>
       </section>
       <nav>
-        {listCapabilities().slice(0, 4).map((item) => (
-          <button key={item}>{item}</button>
-        ))}
+        {listCapabilities()
+          .slice(0, 4)
+          .map((item) => (
+            <button key={item}>{item}</button>
+          ))}
       </nav>
     </main>
   );
