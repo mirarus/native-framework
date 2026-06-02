@@ -16,6 +16,8 @@
       "@uniframe/adapters/*": ["packages/adapters/src/*"],
       "@uniframe/core": ["packages/core/src/index.ts"],
       "@uniframe/core/*": ["packages/core/src/*"],
+      "@uniframe/platforms": ["packages/platforms/src/index.ts"],
+      "@uniframe/platforms/*": ["packages/platforms/src/*"],
       "@uniframe/vite": ["packages/vite/src/index.ts"],
       "@uniframe/vite/*": ["packages/vite/src/*"]
     },
@@ -33,6 +35,7 @@
     "examples/**/*.ts",
     "examples/**/*.tsx",
     "examples/**/*.vue",
+    "capacitor.config.ts",
     "framework.config.js",
     "packages/**/*.js",
     "packages/**/*.ts",

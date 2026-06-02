@@ -1,5 +1,5 @@
-export type TargetRuntime = "node" | "vite" | "electron";
-export type TargetFlavor = "api" | "react" | "vanilla" | "vue" | "desktop";
+export type TargetRuntime = "capacitor" | "node" | "vite" | "electron";
+export type TargetFlavor = "api" | "react" | "vanilla" | "vue" | "desktop" | "mobile";
 
 export interface TargetDefinition {
   runtime: TargetRuntime;
@@ -19,7 +19,7 @@ export const manifest = {
   id: "com.mirarus.uniframe",
   name: "Uniframe",
   version: "0.1.0",
-  description: "Tek repo icinde API, web, mobile, desktop, React ve vanilla JS hedefleri.",
+  description: "Tek repo icinde @capacitor, Electron, React, Vite, Vue ve Node hedefleri.",
   targets: {
     api: {
       runtime: "node",
@@ -45,6 +45,11 @@ export const manifest = {
       runtime: "vite",
       flavor: "react",
       entry: "playground/mobile-react/src/main.tsx"
+    },
+    mobileCapacitor: {
+      runtime: "capacitor",
+      flavor: "mobile",
+      entry: "capacitor.config.ts"
     },
     desktop: {
       runtime: "electron",

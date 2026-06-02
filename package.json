@@ -31,9 +31,10 @@
     "dev:example:fullstack:desktop": "npm run build:packages && npm --workspace fullstack-uniframe run dev:desktop",
     "build": "npm run build:packages && tsx packages/cli/src/uniframe.ts build",
     "build:example": "npm run build:packages && npm --workspace examples/hello-uniframe run build && npm --workspace fullstack-uniframe run build",
-    "build:packages": "npm --workspace @uniframe/core run build && npm --workspace @uniframe/adapters run build && npm --workspace @uniframe/vite run build",
+    "build:packages": "npm --workspace @uniframe/core run build && npm --workspace @uniframe/adapters run build && npm --workspace @uniframe/vite run build && npm --workspace @uniframe/platforms run build",
     "build:desktop:react": "tsx packages/cli/src/uniframe.ts build desktop --flavor react",
     "build:desktop:vue": "tsx packages/cli/src/uniframe.ts build desktop --flavor vue",
+    "build:mobile": "tsx packages/cli/src/uniframe.ts build mobile",
     "build:web": "tsx packages/cli/src/uniframe.ts build web",
     "check": "tsx packages/cli/src/uniframe.ts check",
     "ci": "npm run check && npm run lint && npm run typecheck && npm run test && npm run build && npm run build:example",
@@ -42,10 +43,16 @@
     "format:check": "prettier . --check",
     "info": "tsx packages/cli/src/uniframe.ts info",
     "lint": "eslint .",
+    "mobile:add:android": "cap add android",
+    "mobile:open:android": "cap open android",
+    "mobile:sync": "npm run build:mobile && cap sync",
+    "platforms": "tsx packages/cli/src/uniframe.ts platforms",
     "test": "vitest run",
     "typecheck": "tsc --noEmit && vue-tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
     "@vitejs/plugin-react": "^5.0.0",
     "concurrently": "^9.2.1",
     "electron": "^42.3.2",
@@ -56,6 +63,7 @@
     "vue": "^3.5.35"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.0.0",
     "@eslint/js": "^10.0.1",
     "@types/express": "^5.0.6",
     "@types/node": "^25.9.1",

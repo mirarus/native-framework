@@ -22,6 +22,7 @@ export const appInfo: AppInfo = {
     "web-vue",
     "web-vanilla",
     "mobile",
+    "mobile-capacitor",
     "desktop",
     "desktop-react",
     "desktop-vue"
@@ -43,6 +44,7 @@ export function listCapabilities(): string[] {
     "Vanilla JS UI",
     "Express API",
     "Electron desktop renderer",
+    "Capacitor native mobile",
     "Mobile-first app hedefi",
     "Shared contracts",
     "Adapter-ready architecture"

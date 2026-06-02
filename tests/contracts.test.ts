@@ -17,6 +17,7 @@ describe("shared contracts", () => {
       "webVanilla",
       "webVue",
       "mobile",
+      "mobileCapacitor",
       "desktop",
       "desktopReact",
       "desktopVue"

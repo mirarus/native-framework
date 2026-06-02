@@ -4,6 +4,7 @@ import { existsSync, readFileSync, rmSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { listTargetKeys, manifest } from "../../core/src/index";
+import { formatPlatformMatrix, platformMatrix } from "../../platforms/src/index";
 
 interface FrameworkConfig {
   name?: string;
@@ -240,6 +241,7 @@ function check() {
     ".github/workflows/ci.yml",
     ".vscode/extensions.json",
     ".vscode/settings.json",
+    "docs/platforms.md",
     "playground/api/src/api-server.ts",
     "playground/web-react/index.html",
     "playground/web-react/src/app/app-root.tsx",
@@ -267,6 +269,14 @@ function check() {
     "packages/adapters/src/node.ts",
     "packages/adapters/src/types.ts",
     "packages/adapters/src/web.ts",
+    "packages/platforms/package.json",
+    "packages/platforms/src/adapters/capacitor.ts",
+    "packages/platforms/src/adapters/electron.ts",
+    "packages/platforms/src/adapters/node.ts",
+    "packages/platforms/src/adapters/vite.ts",
+    "packages/platforms/src/definitions.ts",
+    "packages/platforms/src/index.ts",
+    "packages/platforms/src/matrix.ts",
     "packages/vite/src/index.ts",
     "packages/core/src/contracts.ts",
     "packages/core/src/index.ts",
@@ -275,6 +285,7 @@ function check() {
     "packages/cli/src/uniframe.ts",
     "tests/contracts.test.ts",
     "tests/cli.test.ts",
+    "tests/platforms.test.ts",
     "examples/hello-uniframe/package.json",
     "examples/hello-uniframe/src/app/app-root.vue",
     "examples/hello-uniframe/vite.config.ts",
@@ -290,6 +301,7 @@ function check() {
     "examples/fullstack-uniframe/apps/desktop/renderer/vite.config.ts",
     "examples/fullstack-uniframe/apps/android/README.md",
     "examples/fullstack-uniframe/capacitor.config.ts",
+    "capacitor.config.ts",
     "templates/adapter/adapter.ts",
     "tsconfig.json",
     "eslint.config.js",
@@ -303,14 +315,25 @@ function check() {
     "typecheck",
     "test",
     "build",
+    "build:mobile",
     "build:example",
     "build:packages",
-    "check"
+    "check",
+    "mobile:sync",
+    "platforms"
   ].filter((script) => !packageJson.scripts?.[script]);
-  const missingDependencies = ["vite", "express", "electron", "react", "react-dom", "vue"].filter(
-    (dependency) => !packageJson.dependencies?.[dependency]
-  );
+  const missingDependencies = [
+    "@capacitor/android",
+    "@capacitor/core",
+    "vite",
+    "express",
+    "electron",
+    "react",
+    "react-dom",
+    "vue"
+  ].filter((dependency) => !packageJson.dependencies?.[dependency]);
   const missingDevDependencies = [
+    "@capacitor/cli",
     "@vitejs/plugin-vue",
     "tsx",
     "typescript",
@@ -365,6 +388,7 @@ function clean() {
     "packages/core/dist",
     "packages/adapters/dist",
     "packages/vite/dist",
+    "packages/platforms/dist",
     "dist",
     ".vite"
   ];
@@ -387,6 +411,9 @@ function info() {
     console.log(`- ${key}: ${targetInfo.runtime} -> ${targetInfo.entry}`);
   }
   console.log("");
+  console.log("Platform stack:");
+  console.log(`- ${platformMatrix.runtimeStack.join(" + ")}`);
+  console.log("");
   console.log("Portlar:");
   console.log(`- api: ${config.api?.port ?? 4100}`);
   console.log(`- web react: ${config.targets?.web?.reactPort ?? 5173}`);
@@ -395,6 +422,16 @@ function info() {
   console.log(`- mobile: ${config.targets?.mobile?.port ?? 5175}`);
   console.log(`- desktop react: ${config.targets?.desktop?.reactPort ?? 5176}`);
   console.log(`- desktop vue: ${config.targets?.desktop?.vuePort ?? 5178}`);
+}
+
+function platforms() {
+  console.log(platformMatrix.name);
+  console.log(`Stack: ${platformMatrix.runtimeStack.join(" + ")}`);
+  console.log("");
+
+  for (const line of formatPlatformMatrix()) {
+    console.log(`- ${line}`);
+  }
 }
 
 function help() {
@@ -412,6 +449,9 @@ Komutlar:
   npm run dev:desktop:react   React desktop renderer
   npm run dev:desktop:vue     Vue desktop renderer
   npm run build               Web ve mobile build
+  npm run build:mobile        Mobile React build
+  npm run mobile:sync         Capacitor native sync
+  npm run platforms           Platform matrix bilgisini yazdir
   npm run clean               Build ciktilarini temizle
   npm run check               Proje saglik kontrolu
   npm run info                Framework bilgisini yazdir
@@ -428,4 +468,5 @@ else if (command === "build") await build(target);
 else if (command === "check") check();
 else if (command === "clean") clean();
 else if (command === "info") info();
+else if (command === "platforms") platforms();
 else help();

@@ -25,5 +25,15 @@ describe("uniframe cli", () => {
     expect(output).toContain("Uniframe 0.1.0");
     expect(output).toContain("webReact");
     expect(output).toContain("desktop react");
+    expect(output).toContain("@capacitor + electron + react + vite + vue + node");
+  });
+
+  it("prints the platform matrix", () => {
+    const output = runCli("platforms");
+
+    expect(output).toContain("Uniframe Platform Matrix");
+    expect(output).toContain("mobile-capacitor-react");
+    expect(output).toContain("desktop-electron-react");
+    expect(output).toContain("web-vite-vue");
   });
 });

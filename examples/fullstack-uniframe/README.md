@@ -1,6 +1,6 @@
 # Fullstack Uniframe Example
 
-Bu ornek tek proje icinde API, web, desktop ve Android hedeflerini nasil gelistirecegini gosterir.
+Bu ornek tek proje icinde Node API, Vite web, Electron desktop ve Capacitor Android hedeflerini nasil gelistirecegini gosterir.
 
 ## Komutlar
 

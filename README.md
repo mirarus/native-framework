@@ -1,6 +1,6 @@
 # Uniframe
 
-Tek proje altinda TypeScript API, React web, Vue web, vanilla TypeScript web, mobile-first hedef ve React/Vue Electron desktop wrapper sunan profesyonel framework workspace'i.
+Tek proje altinda `@capacitor`, Electron, React, Vite, Vue ve Node destekli profesyonel framework workspace'i.
 
 Uniframe'in hedefi ayni domain modelini, contract'lari ve gelistirici deneyimini koruyarak bir urunu farkli platformlarda tek cati altinda calistirmaktir.
 
@@ -18,9 +18,10 @@ npm run check
 - Core runtime `packages/core/src` altinda TypeScript ile yazilir.
 - Adapter modeli `packages/adapters/src` altinda genisletilir.
 - Vite entegrasyonu `packages/vite/src` altinda reusable library olarak bulunur.
+- Platform matrisi `packages/platforms/src` altinda `@capacitor + electron + react + vite + vue + node` stack'ini tanimlar.
 - React, mobile ve React desktop hedefleri `.tsx`, vanilla hedefi `.ts`, API hedefi `.ts` kullanir.
 - Vue hedefi `.vue` single-file component ve `vue-tsc` typecheck kullanir.
-- `@uniframe/core`, `@uniframe/adapters` ve `@uniframe/vite` alias'lari hazirdir.
+- `@uniframe/core`, `@uniframe/adapters`, `@uniframe/platforms` ve `@uniframe/vite` alias'lari hazirdir.
 - VS Code icin `.vscode/settings.json`, task ve extension onerileri eklenmistir.
 
 ## Kalite Kapisi
@@ -45,6 +46,7 @@ npm run dev:mobile       # http://localhost:5175
 npm run dev:desktop      # Electron wrapper + React desktop
 npm run dev:desktop:react
 npm run dev:desktop:vue
+npm run platforms       # @capacitor + electron + react + vite + vue + node matrix
 npm run dev:example      # examples/hello-uniframe
 npm run dev:example:fullstack
 npm run dev:example:fullstack:desktop
@@ -65,14 +67,41 @@ npm run build:web -- --flavor vanilla
 npm run build:web -- --flavor vue
 npm run build:desktop:react
 npm run build:desktop:vue
+npm run build:mobile
 npm run build:packages
 npm run build:example
 npm run build
 ```
 
+## Native Mobile
+
+```bash
+npm run mobile:add:android
+npm run mobile:sync
+npm run mobile:open:android
+```
+
+Root Capacitor config `capacitor.config.ts` dosyasi `playground/mobile-react/dist` ciktisini Android native kabuguna baglar.
+
+## Platform Matrix
+
+```bash
+npm run platforms
+```
+
+Bu komut framework stack'ini tek kayittan listeler:
+
+- `@capacitor + React + Vite` mobile
+- `Electron + React + Vite` desktop
+- `Electron + Vue + Vite` desktop
+- `Vite + React` web
+- `Vite + Vue` web
+- `Node + Express` API
+
 ## Mimari
 
 ```txt
+capacitor.config.ts
 playground/
   api/             TypeScript Express API
   web-react/       React + TypeScript web hedefi
@@ -95,6 +124,7 @@ packages/
   adapters/        Platform adapter ornekleri
   cli/             TypeScript kaynakli Uniframe komut satiri
   core/            Manifest, contract ve ortak runtime tipleri
+  platforms/       @capacitor/electron/react/vite/vue/node matrix
   vite/            Vite helper library
 framework.config.js
 ```
@@ -105,6 +135,7 @@ Detaylar:
 - [Adapter Rehberi](docs/adapters.md)
 - [Gelistirme Rehberi](docs/development.md)
 - [Library Yapisi](docs/library.md)
+- [Platform Matrix](docs/platforms.md)
 - [Katki Rehberi](CONTRIBUTING.md)
 - [Guvenlik](SECURITY.md)
 
@@ -116,7 +147,7 @@ Uniframe'in ana ilkesi tek cati, coklu hedef:
 - API ayni repo icinde yasayan Express route'lari ile calisir.
 - Core contract dosyalari tum hedefler tarafindan import edilir.
 - Desktop hedefi Electron ile kendi React veya Vue renderer UI alanini masaustune tasir.
-- Mobile hedefi bugun mobile-first web/PWA olarak calisir; Expo/React Native adapter'i icin ayni CLI hedefi korunur.
+- Mobile hedefi React + Vite olarak gelistirilir ve Capacitor ile Android native kabuguna senkronlanir.
 
 Bu paket artik sadece MVP degil; CI, lint, typecheck, test, manifest, publish-ready library paketleri, ornek proje, dokumantasyon ve guvenlik hijyeni olan genisletilebilir bir framework temelidir.
 

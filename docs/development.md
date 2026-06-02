@@ -29,6 +29,7 @@ npm run dev:mobile
 npm run dev:desktop
 npm run dev:desktop:react
 npm run dev:desktop:vue
+npm run platforms
 npm run dev:example
 npm run dev:example:fullstack
 npm run dev:example:fullstack:desktop
@@ -50,6 +51,7 @@ playground/
   desktop/preload/desktop-preload.cjs
   desktop/renderer/src/main.ts
   desktop/renderer-react/src/main.tsx
+capacitor.config.ts
 examples/
   hello-uniframe
   fullstack-uniframe
@@ -62,6 +64,7 @@ examples/
 packages/
   core/src
   adapters/src
+  platforms/src
   vite/src
   cli/src
 ```
@@ -72,6 +75,8 @@ packages/
 - Playground build ciktilari `playground/*/dist` altina gider ve git'e alinmaz.
 - `npm run clean` build ciktilarini temizler.
 - `npm run info` framework manifest ve port bilgisini yazdirir.
+- `npm run platforms` `@capacitor + electron + react + vite + vue + node` platform matrix'ini yazdirir.
+- `npm run mobile:sync` React mobile build ciktisini Capacitor native hedeflerine senkronlar.
 - VS Code task'lari `.vscode/tasks.json` icinde hazirdir.
 - `npm run build:packages` library paketlerini ESM, CJS ve type declaration formatinda uretir.
 - `examples/fullstack-uniframe` API, web, React desktop, Vue desktop ve Android akisini tek proje icinde gosterir.

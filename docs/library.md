@@ -6,6 +6,7 @@ Uniframe artik sadece bir uygulama starter'i degil, workspace icinde gelistirile
 
 - `@uniframe/core`: Manifest, contract, platform tipleri, ortak storage ve health yardimcilari.
 - `@uniframe/adapters`: Browser ve Node adapter ornekleri.
+- `@uniframe/platforms`: `@capacitor + electron + react + vite + vue + node` hedef matrix'i.
 - `@uniframe/vite`: Vite config helper'i ve tsconfig path entegrasyonu.
 - `@uniframe/cli`: Framework komut satiri paketi.
 
@@ -15,7 +16,7 @@ Uniframe artik sadece bir uygulama starter'i degil, workspace icinde gelistirile
 npm run build:packages
 ```
 
-Bu komut `@uniframe/core`, `@uniframe/adapters` ve `@uniframe/vite` paketleri icin:
+Bu komut `@uniframe/core`, `@uniframe/adapters`, `@uniframe/vite` ve `@uniframe/platforms` paketleri icin:
 
 - ESM output
 - CJS output
@@ -27,6 +28,7 @@ uretir.
 
 ```ts
 import { createGreeting } from "@uniframe/core";
+import { platformMatrix } from "@uniframe/platforms";
 import { defineUniframeViteConfig } from "@uniframe/vite";
 ```
 
@@ -39,6 +41,7 @@ import { defineUniframeViteConfig } from "@uniframe/vite";
 npm run build:example
 npm run dev:example
 npm run dev:example:fullstack
+npm run platforms
 npm --workspace fullstack-uniframe run dev:desktop:react
 npm --workspace fullstack-uniframe run dev:desktop:vue
 ```
