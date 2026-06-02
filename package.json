@@ -9,7 +9,7 @@
     "npm": ">=10.0.0"
   },
   "bin": {
-    "uniframe": "./packages/cli/uniframe.js"
+    "uniframe": "packages/cli/uniframe.js"
   },
   "workspaces": [
     "packages/*",
